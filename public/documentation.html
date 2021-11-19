@@ -7,6 +7,52 @@
     <body>
         <h1>Documentation Page</h1>
         <p>In this project we will be setting up a movie api. We will be returning a list of all movies to the user. This will include a description as well as genre, movie poster, and even information about the director. After which users will be allowed to register an account to keep tabs on their favorite movies and movies they want to watch.</p>
+    
+        <h1>Return a list of ALL movies to the user</h1>
+        <p>'/movies'
+            <br>GET
+        </p>
+        <h1>Return movie data (description, genre, director, image URL)</h1>
+        <p>'/movies/:movieInformation'
+            <br>GET
+        </p>
+        <h1>Return movie data about a genre</h1>
+        <p>'/movies/:genre'
+            <br>GET
+        </p>
+        <h1>Return data about a director</h1>
+        <p>'/directors/:directorInfo'
+            <br>GET
+        </p>
+        <h1>allow new users to register</h1>
+        <p>'/users'
+            <br>POST
+        </p>
+        <h1>allow users to update their user info(username)</h1>
+        <p>'/users/:accountInfo/'
+            <br>PUT
+        </p>
+
+        //More on this later list:??
+        <h1>allow users to add a movie to their list of favorites</h1>
+        <p>'users/:accountInfo/:favoritesList/:add'
+            <br>POST
+        </p>
+        <h1>allow users to remove a movie from their list of favorites</h1>
+        <p>'users/:accountInfo/:favoritesList/:remove'
+            <br>DELETE
+        </p>
+        <h1>allow existing users to deregister</h1>
+        <p>'users/:accountInfo/:deleteAccount'
+            <br>DELETE
+        </p>
+    
+    
+    
+    
+    
+    
     </body>
+
 </html>
     

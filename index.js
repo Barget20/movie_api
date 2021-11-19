@@ -3,9 +3,12 @@ const morgan = require('morgan');
 
 const app = express();
 const bodyParser = require('body-parser'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
+    uuid = require('uuid');
 
-let topMovies = [
+app.use(bodyParser.json());
+
+let movies = [
     {
         title: 'Ready Player One',
         director: 'Steven Spielberg'
@@ -61,9 +64,37 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+
 // GET requests
-app.get('/', (req, res)=> {
-    res.send('Welcome to my movie club!');
+
+app.get('/', (req, res) => {
+    res.send('Welcome');
+})
+
+app.get('/movies', (req, res)=> {
+    res.json(movies);
+});
+
+app.get('/movies/:movieInfo', (req, res)=> {
+    res.json(movies.find((movies) => { 
+    return movies.movieInfo === req.params.movieInfo}));
+    res.send('returns that movies information of: description, genre, director, and an image')
+});
+
+app.get('/movies/:genre', (req, res)=> {
+    res.json(); 
+    res.send('returns list of genres with descriptions')
+})
+
+app.get('/directors', (req, res)=> {
+    res.json(directors);
+    res.send('returns list of directors')
+});
+
+app.get('/directors/:directorsInfo', (req, res) => {
+    res.json(directors.find((directors) => {
+    return directors.directorsInfo === req.params.directorsInfo}));
+    res.send('returns a webpage of the selected directors info')
 });
 
 app.get('/unknown', (req, rest) => {
@@ -75,7 +106,23 @@ app.get('/documentation', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-    res.json(topMovies);
+    res.json(movies);
+});
+
+// POST/PUT Requests
+
+app.post('/users', (req, res) => {
+    let newUser = req.body;
+
+    res.send('allows area for new user to register');
+}
+
+app.put('/users/:accountInfo', (req, res) => {
+    let user = users.find(user) => return user.name === req.params.name}));
+    if (user) {
+
+    }
+    res.send('allows user access to their account information to edit/update user name')
 });
 
 
