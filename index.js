@@ -83,7 +83,7 @@ app.get('/movies/:movieInfo', (req, res)=> {
 
 app.get('/movies/:genre', (req, res)=> {
     res.json(); 
-    res.send('returns list of genres with descriptions')
+    res.send('returns list of movies by genres')
 })
 
 app.get('/directors', (req, res)=> {

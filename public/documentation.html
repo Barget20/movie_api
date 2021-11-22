@@ -8,29 +8,35 @@
         <h1>Documentation Page</h1>
         <p>In this project we will be setting up a movie api. We will be returning a list of all movies to the user. This will include a description as well as genre, movie poster, and even information about the director. After which users will be allowed to register an account to keep tabs on their favorite movies and movies they want to watch.</p>
     
-        <h1>Return a list of ALL movies to the user</h1>
-        <p>'/movies'
-            <br>GET
+        <h1>Request: Return a list of ALL movies to the user</h1>
+        <p>URL: '/movies'
+            <br>Method: GET
+            <br>Response: JSON the movie titles list
         </p>
-        <h1>Return movie data (description, genre, director, image URL)</h1>
-        <p>'/movies/:movieInformation'
-            <br>GET
+        <h1>Request: Return movie data (description, genre, director, image URL)</h1>
+        <p>URL: '/movies/:movieInformation'
+            <br>Method: GET
+            <br>Response: JSON the movie information of selected movie
         </p>
-        <h1>Return movie data about a genre</h1>
-        <p>'/movies/:genre'
-            <br>GET
+        <h1>Request: Return movies categorized by genre</h1>
+        <p>URL: '/movies/:genre'
+            <br>Method: GET
+            <br>Response: JSON listings of movies by genre
         </p>
-        <h1>Return data about a director</h1>
-        <p>'/directors/:directorInfo'
-            <br>GET
+        <h1>Request: Return data about a director</h1>
+        <p>URL: '/directors/:directorInfo'
+            <br>Method: GET
+            <br>Response: JSON list of directors, followed by information on each director
         </p>
-        <h1>allow new users to register</h1>
-        <p>'/users'
-            <br>POST
+        <h1>Request: allow new users to register</h1>
+        <p>URL: '/users'
+            <br>Method: POST
+            <br>Response: JSON required user information and submitted to database
         </p>
-        <h1>allow users to update their user info(username)</h1>
-        <p>'/users/:accountInfo/'
-            <br>PUT
+        <h1>Request: allow users to update their user info(username)</h1>
+        <p>URL: '/users/:accountInfo/'
+            <br>Method: PUT
+            <br>Response: JSON users information that can be updated
         </p>
 
         //More on this later list:??
@@ -47,6 +53,32 @@
             <br>DELETE
         </p>
     
+        <h1>Example Responses</h1>
+
+        Movie Example:
+        1) "title"
+        2) "inserted movie cover"
+        3) "insert description of movies storyline"
+        4) "insert genre of movie and year of release"
+        
+        Director:
+        1) "name"
+        2) "photo"
+        3) "birth/death"
+        4) "list of movie titles"
+        5) "list of any award or major nominations"
+
+        Genre:
+        1) "types" [action, comedy, drama, fantasy, horror, mystery, romance, thriller, western]
+        2) "brief description"
+
+        User:
+        1) "ID#"
+        2) "username"
+        3) "password"
+        4) "email address"
+        5) "password question"
+
     
     
     
