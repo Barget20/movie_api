@@ -3,10 +3,8 @@ const morgan = require('morgan');
 
 const app = express();
 const bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    uuid = require('uuid');
-
-app.use(bodyParser.json());
+    methodOverride = require('method-override');
+    //uuid = require('uuid');
 
 let movies = [
     {
@@ -71,59 +69,53 @@ app.get('/', (req, res) => {
     res.send('Welcome');
 })
 
-app.get('/movies', (req, res)=> {
+app.get('/movies', (req, res) => {
     res.json(movies);
 });
 
 app.get('/movies/:movieInfo', (req, res)=> {
-    res.json(movies.find((movies) => { 
-    return movies.movieInfo === req.params.movieInfo}));
+  //  res.json(movies.find((movies) => { 
+    //return movies.movieInfo === req.params.movieInfo}));
     res.send('returns that movies information of: description, genre, director, and an image')
 });
 
 app.get('/movies/:genre', (req, res)=> {
-    res.json(); 
+   // res.json(); 
     res.send('returns list of movies by genres')
-})
+});
 
 app.get('/directors', (req, res)=> {
-    res.json(directors);
+   // res.json(directors);
     res.send('returns list of directors')
 });
 
 app.get('/directors/:directorsInfo', (req, res) => {
-    res.json(directors.find((directors) => {
-    return directors.directorsInfo === req.params.directorsInfo}));
+    //res.json(directors.find((directors) => {
+   // return directors.directorsInfo === req.params.directorsInfo}));
     res.send('returns a webpage of the selected directors info')
 });
 
-app.get('/unknown', (req, rest) => {
-    res.send('We are currently under construction.');
+app.get('/unknown', (req, res) => {
+    res.send('We are currently under construction.')
 });
 
 app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
-    res.json(movies);
-});
-
 // POST/PUT Requests
 
 app.post('/users', (req, res) => {
-    let newUser = req.body;
+    //let newUser = req.body;
 
     res.send('allows area for new user to register');
-}
-
-app.put('/users/:accountInfo', (req, res) => {
-    let user = users.find(user) => return user.name === req.params.name}));
-    if (user) {
-
-    }
-    res.send('allows user access to their account information to edit/update user name')
 });
+
+app.put('/users/:accountInfo', (req, res) => 
+//{
+   // let user = users.find(user) => return user.name === req.params.name});
+    
+    res.send('allows user access to their account information to edit/update user name'));
 
 
 
