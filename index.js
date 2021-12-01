@@ -35,6 +35,10 @@ let movies = [
         title: 'Pirates of the Caribbean: The Curse of the Black Pearl',
         director: 'Gore Verbinski'
     },
+    {    
+        title: 'Pirates of the Caribbean: Dead Mans Chest',
+        director: 'Gore Verbinski'
+    },
     {
         title: 'Paper Towns',
         director: 'Jack Schreier'

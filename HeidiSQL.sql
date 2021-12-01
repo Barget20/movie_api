@@ -1,0 +1,49 @@
+CREATE TABLE Genres (
+	GenreID SERIAL PRIMARY KEY,
+	NAME VARCHAR(50) NOT NULL,
+	Description varchar(1000)
+	);
+
+CREATE TABLE Directors (
+	DirectorID SERIAL PRIMARY KEY,
+	NAME VARCHAR(50) NOT NULL,
+	Bio VARCHAR(1000),
+	Birthyear DATE,
+	Deathyear DATE,
+	);
+	
+CREATE TABLE Movies (
+	MovieID SERIAL PRIMARY KEY,
+	Title VARCHAR(50) NOT NULL,
+	Description VARCHAR(1000),
+	DirectorID INTEGER NOT NULL,
+	GenreID INTEGER NOT NULL,
+	ImageURL VARCHAR(300),
+	Featured BOOLEAN,
+	CONSTRAINT GenreKey FOREIGN KEY (GenreID)
+		REFERENCES Genres (GenreID),
+	CONSTRAINT DirectorKey FOREIGN KEY (DirectorID)
+		REFERENCES Directors (DirectorsID)
+	);
+	
+Users TABLE:
+
+CREATE TABLE Users (
+	UserID serial PRIMARY KEY,
+	Username VARCHAR(50) NOT NULL,
+	PASSWORD VARCHAR(50) NOT NULL,
+	Email VARCHAR(50) NOT NULL,
+	Birth_date date
+	);
+	
+Users-Favorites TABLE:
+
+CREATE TABLE Users_Favorites (
+	UserMovieID SERIAL PRIMARY KEY,
+	UserID INTEGER,
+	MovieID INTEGER,
+	CONSTRAINT UserKey FOREIGN KEY (UserID)
+		REFERENCES Users(UserID),
+	CONSTRAINT MovieKey FOREIGN KEY (MovieID)
+		REFERENCES Movies(MovieID)
+	);
