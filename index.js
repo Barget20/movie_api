@@ -131,7 +131,7 @@ app.delete('/users/accountInfo/favoritesList/:movieID', (req, res) => {
     res.send('allows user to remove a movie from their list of favorites');
 });
 
-app.delete('/users/:accountInfo/:user', (req, res) => {
+app.delete('/users/accountInfo/:user', (req, res) => {
     res.send('allows user to deregister/delete their account');
 });
 
