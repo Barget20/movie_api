@@ -83,7 +83,7 @@ app.get('/movies/:movieInfo', (req, res)=> {
     res.send('returns that movies information of: description, genre, director, and an image')
 });
 
-app.get('/movies/:genre', (req, res)=> {
+app.get('/movies/genre/:genre', (req, res)=> {
    // res.json(); 
     res.send('returns list of movies by genres')
 });
@@ -121,7 +121,19 @@ app.put('/users/:accountInfo', (req, res) =>
     
     res.send('allows user access to their account information to edit/update user name'));
 
+app.post('users/accountInfo/favoritesList/:add', (req, res) => {
+    res.send('allows user to add a movie to their list of favorites')
+});
 
+//Delete Requests
+
+app.delete('users/accountInfo/favoritesList/:remove', (req, res) => {
+    res.send('allows user to remove a movie from their list of favorites')
+});
+
+app.delete('users/accountInfo/:deleteAccount', (req, res) => {
+    res.send('allows user to deregister/delete their account')
+});
 
 //listen for requests
 app.listen(8080, () => {
