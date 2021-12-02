@@ -80,27 +80,27 @@ app.get('/movies', (req, res) => {
 app.get('/movies/:movieInfo', (req, res)=> {
   //  res.json(movies.find((movies) => { 
     //return movies.movieInfo === req.params.movieInfo}));
-    res.send('returns that movies information of: description, genre, director, and an image')
+    res.send('returns that movies information of: description, genre, director, and an image');
 });
 
-app.get('/movies/genre/:genre', (req, res)=> {
+app.get('/movies/genres/:genreInfo', (req, res)=> {
    // res.json(); 
-    res.send('returns list of movies by genres')
+    res.send('returns list of movies by genres');
 });
 
 app.get('/directors', (req, res)=> {
    // res.json(directors);
-    res.send('returns list of directors')
+    res.send('returns list of directors');
 });
 
 app.get('/directors/:directorsInfo', (req, res) => {
     //res.json(directors.find((directors) => {
    // return directors.directorsInfo === req.params.directorsInfo}));
-    res.send('returns a webpage of the selected directors info')
+    res.send('returns a webpage of the selected directors info');
 });
 
 app.get('/unknown', (req, res) => {
-    res.send('We are currently under construction.')
+    res.send('We are currently under construction.');
 });
 
 app.get('/documentation', (req, res) => {
@@ -121,18 +121,18 @@ app.put('/users/:accountInfo', (req, res) =>
     
     res.send('allows user access to their account information to edit/update user name'));
 
-app.post('users/accountInfo/favoritesList/:add', (req, res) => {
-    res.send('allows user to add a movie to their list of favorites')
+app.post('/users/accountInfo/favoritesList/:movieID', (req, res) => {
+    res.send('allows user to add a movie to their list of favorites');
 });
 
 //Delete Requests
 
-app.delete('users/accountInfo/favoritesList/:remove', (req, res) => {
-    res.send('allows user to remove a movie from their list of favorites')
+app.delete('/users/accountInfo/favoritesList/:movieID', (req, res) => {
+    res.send('allows user to remove a movie from their list of favorites');
 });
 
-app.delete('users/accountInfo/:deleteAccount', (req, res) => {
-    res.send('allows user to deregister/delete their account')
+app.delete('/users/:accountInfo/:user', (req, res) => {
+    res.send('allows user to deregister/delete their account');
 });
 
 //listen for requests
