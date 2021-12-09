@@ -41,7 +41,7 @@ let movies = [
     },
     {
         title: 'Paper Towns',
-        director: 'Jack Schreier'
+        director: 'Jake Schreier'
     },
     {
         title: 'Sherlock Holmes (2009)',
