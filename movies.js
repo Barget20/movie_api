@@ -185,3 +185,63 @@ var movie11 = {
     Featured: true
 }
 db.movies.insertOne(movie11)
+
+
+let user1 = {
+    Username: "Brian A",
+    Password: "11111",
+    Email: "BrianA@gmail.com",
+    Birthday:new Date("1990-01-01"),
+    FavoriteMovies: ["61b3bf01d57fd41692c9f977"],
+}
+db.users.insertOne(user1)
+let user2 = {
+    Username: "Brian B",
+    Password: "22222",
+    Email: "BrianB@gmail.com",
+    Birthday: new Date("1991-01-01"),
+    FavoriteMovies: ["61b3d088d57fd41692c9f978"],
+}
+db.users.insertOne(user2)
+let user3 = {
+    Username: "Brian C",
+    Password: "33333",
+    Email: "BrianC@gmail.com",
+    Birthday: new Date("1992-01-01"),
+    FavoriteMovies: ["61b3d088d57fd41692c9f979"],
+}
+db.users.insertOne(user3)
+let user4 = {
+    Username: "Brian D",
+    Password: "44444",
+    Email: "BrianD@gmail.com",
+    Birthday: new Date("1993-01-01"),
+    FavoriteMovies: ["61b3d088d57fd41692c9f97f"],
+}
+db.users.insertOne(user4)
+let user5 = {
+    Username: "Brian E",
+    Password: "55555",
+    Email: "BrianE@gmail.com",
+    Birthday: new Date("1994-01-01"),
+    FavoriteMovies: ["61b3d088d57fd41692c9f981"],
+}
+db.users.insertOne(user5)
+
+//Updates:
+
+db.movies.update (
+    {_id: ObjectID("61b3d088d57fd41692c9f981")},
+    { $set: {Description: "A local Pennsylvania band scores a one-hit wonder in 1964 and rides the star-making machinery as long as they can, with lots of help from their manager. A lot of fun music is played."}}
+)
+db.movies.update (
+    {_id: ObjectID("61b3d088d57fd41692c9f981")},
+    { $push: {Director: {Bio:"This is a new directors bio"}}}
+)
+db.users.update(
+    { Username: "Brian A"},
+    { $push: {FavoriteMovies: ObjectID("61b7aa4fb74633d6d89281eb")}}
+)
+//Deletion:
+db.users.deleteOne({Username: "Brian E"})
+
