@@ -1,5 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Models = require('.models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://loclahost:27017/test', { useNewUrlParser: true, useUnififedTopology: true});
 
 const app = express();
 const bodyParser = require('body-parser'),

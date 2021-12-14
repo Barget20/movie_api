@@ -231,16 +231,15 @@ db.users.insertOne(user5)
 //Updates:
 
 db.movies.update (
-    {_id: ObjectID("61b3d088d57fd41692c9f981")},
+    {_id: ObjectId("61b3d088d57fd41692c9f981")},
     { $set: {Description: "A local Pennsylvania band scores a one-hit wonder in 1964 and rides the star-making machinery as long as they can, with lots of help from their manager. A lot of fun music is played."}}
 )
-db.movies.update (
-    {_id: ObjectID("61b3d088d57fd41692c9f981")},
-    { $push: {Director: {Bio:"This is a new directors bio"}}}
+db.movies.updateMany ({"Director.Name": "Gore Verbinski"},
+    {$set: {"Director.Bio":"This is the bio for Gore Verbinski."}}
 )
 db.users.update(
     { Username: "Brian A"},
-    { $push: {FavoriteMovies: ObjectID("61b7aa4fb74633d6d89281eb")}}
+    { $push: {FavoriteMovies: ObjectId("61b7aa4fb74633d6d89281eb")}}
 )
 //Deletion:
 db.users.deleteOne({Username: "Brian E"})
