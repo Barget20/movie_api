@@ -93,7 +93,10 @@ app.get('/movies', (req, res) => {
 });
 
 app.get('/movies/:movieInfo', (req, res)=> {
-    Movies.findOne({Title: req.params.movieInfo})
+    movieInfo = req.params.movieInfo;
+    const searchedMovie =
+        movieInfo.charAt(0).toUpperCase() + movieInfo.slice(1).toLowerCase();
+    Movies.findOne({Title: searchedMovie})
     .then((movie) => {
         res.json(movie);
     })
@@ -104,7 +107,10 @@ app.get('/movies/:movieInfo', (req, res)=> {
 });
 
 app.get('/movies/genres/:genreInfo', (req, res)=> {
-   Movies.findOne({"Genre.Name": req.params.genreInfo})
+    genreInfo = req.params.genreInfo;
+    const searchedGenre =
+        genreInfo.charAt(0).toUpperCase() + genreInfo.slice(1).toLowerCase();
+   Movies.findOne({"Genre.Name": searchedGenre})
    .then((movie) => {
        res.json(movie.Genre.Description);
    })
@@ -114,18 +120,11 @@ app.get('/movies/genres/:genreInfo', (req, res)=> {
    });
 });
 
-app.get('/movies/directors', (req, res)=> {
-   Movies.findOne()
-    .then((directors) => {
-        res.status(201).json(directors);
-    })
-    .catch((err) => {
-        console.error(500).send('Error: ' + err)
-    });
-});
-
 app.get('/movies/directors/:directorsInfo', (req, res) => {
-    Movies.findOne({ "Director.Name": req.params.directorsInfo})
+    directorInfo = req.params.directorInfo;
+    const searchedDirector =
+        directorInfo.charAt(0).toUpperCase() + directorInfo.slice(1).toLowerCase();
+    Movies.findOne({ "Director.Name": searchedDirector})
     .then((movie) => {
         res.json(movie.Director);
     })
