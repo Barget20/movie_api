@@ -5,8 +5,8 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
+//const Genres = Models.Genre;
+//const Directors = Models.Director;
 
 mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -97,10 +97,7 @@ app.get('/movies', (req, res) => {
 });
 
 app.get('/movies/:movieInfo', (req, res)=> {
-    movieInfo = req.params.movieInfo;
-    const searchedMovie =
-        movieInfo.charAt(0).toUpperCase() + movieInfo.slice(1).toLowerCase();
-    Movies.findOne({Title: searchedMovie})
+    Movies.findOne({Title: req.params.title})
     .then((movie) => {
         res.json(movie);
     })
@@ -111,12 +108,9 @@ app.get('/movies/:movieInfo', (req, res)=> {
 });
 
 app.get('/movies/genres/:genreInfo', (req, res)=> {
-    genreInfo = req.params.genreInfo;
-    const searchedGenre =
-        genreInfo.charAt(0).toUpperCase() + genreInfo.slice(1).toLowerCase();
-   Movies.findOne({"Genre.Name": searchedGenre})
+   Movies.findOne({"Genre.Name": req.params.genreInfo})
    .then((movie) => {
-       res.json(movie.Genre.Description);
+       res.json(movie.Genres);
    })
    .catch((err) => {
        console.error(err);
@@ -125,10 +119,7 @@ app.get('/movies/genres/:genreInfo', (req, res)=> {
 });
 
 app.get('/movies/directors/:directorsInfo', (req, res) => {
-    directorInfo = req.params.directorInfo;
-    const searchedDirector =
-        directorInfo.charAt(0).toUpperCase() + directorInfo.slice(1).toLowerCase();
-    Movies.findOne({ "Director.Name": searchedDirector})
+    Movies.findOne({ "Director.Name": req.params.directorsInfo})
     .then((movie) => {
         res.json(movie.Director);
     })

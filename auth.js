@@ -1,4 +1,3 @@
-auth.js
 
 const jwtSecret = 'your_jwt_secret';
 
