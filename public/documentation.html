@@ -14,24 +14,24 @@
             <br>Response: JSON the movie titles list
         </p>
         <h1>Request: Return movie data (description, genre, director, image URL)</h1>
-        <p>URL: '/movies/:movieInformation'
+        <p>URL: '/movies/:movieInfo'
             <br>Method: GET
             <br>Response: JSON the movie information of selected movie
         </p>
         <h1>Request: Return movies categorized by genre</h1>
-        <p>URL: '/movies/:genre'
+        <p>URL: '/movies/genres/:genreInfo'
             <br>Method: GET
-            <br>Response: JSON listings of movies by genre
+            <br>Response: JSON listings of genre description
         </p>
         <h1>Request: Return data about a director</h1>
-        <p>URL: '/directors/:directorInfo'
+        <p>URL: '/movies/directors/:directorInfo'
             <br>Method: GET
-            <br>Response: JSON list of directors, followed by information on each director
+            <br>Response: JSON list of directors information.
         </p>
         <h1>Request: allow new users to register</h1>
         <p>URL: '/users'
             <br>Method: POST
-            <br>Response: JSON required user information and submitted to database
+            <br>Response: JSON required username, password, email, and birthday to register.
         </p>
         <h1>Request: allow users to update their user info(username)</h1>
         <p>URL: '/users/:accountInfo/'
@@ -40,15 +40,15 @@
         </p>
 
         <h1>allow users to add a movie to their list of favorites</h1>
-        <p>'users/accountInfo/favoritesList/:add'
+        <p>'users/:accountInfo/favoritesList/:movieID'
            <br>POST
         </p>
         <h1>allow users to remove a movie from their list of favorites</h1>
-        <p>'users/accountInfo/favoritesList/:remove'
+        <p>'users/:accountInfo/favoritesList/:movieID'
             <br>DELETE
         </p>
         <h1>allow existing users to deregister</h1>
-        <p>'users/:username'
+        <p>'users/:accountInfo'
             <br>DELETE
         </p>
     
