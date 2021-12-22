@@ -120,7 +120,7 @@ app.get('/movies/genres/:genreInfo', (req, res)=> {
 
 //changed directorsInfo to directorInfo//
 app.get('/movies/directors/:directorInfo', (req, res) => {
-    Movies.findOne({ "Director.Name": req.params.directorInfo})
+    Movies.find({ "Director.Name": req.params.directorInfo})
     .then((movie) => {
         res.json(movie);
     })
@@ -247,7 +247,7 @@ app.post('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
 //Delete Requests
 
 app.delete('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
-    Movies.findOneAndRemove({ MovieID: req.params.MovieID})
+    Movies.findOneAndUpdate({ MovieID: req.params.MovieID})
     .then((movie) => {
         if (!movie) {
             res.status(400).send(req.params.MovieID + ' was not found');
