@@ -5,8 +5,7 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-//const Genres = Models.Genre;
-//const Directors = Models.Director;
+
 
 mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -14,64 +13,16 @@ const app = express();
 const bodyParser = require('body-parser'),
     methodOverride = require('method-override');
 
-  //  uuid = require('uuid');
-
-let movies = [
-    {
-        title: 'Ready Player One',
-        director: 'Steven Spielberg'
-    },
-    {
-        title: 'Deadpool',
-        director: 'Tim Miller'
-    }, 
-    {
-        title: 'Fight Club',
-        director: 'David Fincher'
-    },
-    {
-        title: 'Inception',
-        director: 'Christopher Nolan'
-    },
-    {
-        title: 'Moneyball',
-        director: 'Bennett Miller'
-    },
-    {
-        title: 'The Nightmare Before Christmas',
-        director: 'Henry Selick'
-    },
-    {
-        title: 'Pirates of the Caribbean: The Curse of the Black Pearl',
-        director: 'Gore Verbinski'
-    },
-    {    
-        title: 'Pirates of the Caribbean: Dead Mans Chest',
-        director: 'Gore Verbinski'
-    },
-    {
-        title: 'Paper Towns',
-        director: 'Jake Schreier'
-    },
-    {
-        title: 'Sherlock Holmes (2009)',
-        director: 'Guy Ritchie'
-    },
-    {
-        title: 'That Thing You Do',
-        director: 'Tom Hanks'
-    },
-
-]
-
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use((err, req, res, next) => {
@@ -86,14 +37,15 @@ app.get('/', (req, res) => {
     res.send('Welcome');
 })
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.find()
-    .then((movies) => {
-        res.status(201).json(movies);
-    })
-    .catch((err) => {
-        console.error(500).send('Error: ' + err)
-    });
+        .then((movies) => {
+            res.status(201).json(movies);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
 });
 
 app.get('/movies/:movieInfo', (req, res)=> {
@@ -161,16 +113,7 @@ app.get('/users/:accountInfo', (req, res) => {
     });
 });
 
-app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    Movies.find()
-        .then((movies) => {
-            res.status(201).json(movies);
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
-});
+
 
 
 // POST/PUT Requests
