@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+//const { check, validationResult} = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -12,7 +13,8 @@ mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useU
 const app = express();
 const bodyParser = require('body-parser'),
     methodOverride = require('method-override');
-
+app.use(bodyParser.json());
+app.use(methodOverride());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
@@ -38,8 +40,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-app.use(bodyParser.json());
-app.use(methodOverride());
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
@@ -129,12 +130,19 @@ app.get('/users/:accountInfo', (req, res) => {
 });
 
 
-
-
 // POST/PUT Requests
 
-app.post('/users', (req, res) => {
-
+app.post('/users', 
+   // [check('Username', 'Username is required').isLength({min: 5}),
+    //check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  //  check('Password', 'Password is required').not().isEmpty(),
+   // check('Email', 'Email does not apprea to be valid').isEmail()
+//], (req, res) => {
+    //let errors = validationResults(req);
+  //  if (!errors.isEmpty()) {
+      //  return res.status(422).json({ errors: errors.array() });
+    //}
+    //let hashedPasswords = Users.hashedPasswords(req.body.Password);
     Users.findOne({ Username: req.body.Username})
     .then((user) => {
         if (user) {
@@ -201,6 +209,7 @@ app.post('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
         }
     });
 });
+
 
 //Delete Requests
 
