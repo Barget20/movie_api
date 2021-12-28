@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-//const { check, validationResult} = require('express-validator');
+const { check, validationResult} = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -133,16 +133,17 @@ app.get('/users/:accountInfo', (req, res) => {
 // POST/PUT Requests
 
 app.post('/users', 
-   // [check('Username', 'Username is required').isLength({min: 5}),
-    //check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  //  check('Password', 'Password is required').not().isEmpty(),
-   // check('Email', 'Email does not apprea to be valid').isEmail()
-//], (req, res) => {
-    //let errors = validationResults(req);
-  //  if (!errors.isEmpty()) {
-      //  return res.status(422).json({ errors: errors.array() });
-    //}
-    //let hashedPasswords = Users.hashedPasswords(req.body.Password);
+    [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not apprea to be valid').isEmail()
+], (req, res) => {
+    let errors = validationResults(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPasswords = Users.hashedPasswords(req.body.Password);
     Users.findOne({ Username: req.body.Username})
     .then((user) => {
         if (user) {
@@ -245,6 +246,11 @@ app.delete('/users/:accountInfo', (req, res) => {
 });
 
 //listen for requests
-app.listen(8080, () => {
-    console.log('Your app is listening on port 8080.');
+//app.listen(8080, () => {
+  //  console.log('Your app is listening on port 8080.');
+//});
+
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+    console.log('listening on port ' + port);
 });
