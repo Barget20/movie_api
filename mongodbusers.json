@@ -1,0 +1,5 @@
+{"_id":{"$oid":"61b7aa4fb74633d6d89281eb"},"Username":"Brian A","Password":"11111","Email":"BrianA@gmail.com","Birthday":{"$date":"1990-01-01T00:00:00Z"},"FavoriteMovies":["61b3bf01d57fd41692c9f977",{"$oid":"61b7aa4fb74633d6d89281eb"}]}
+{"_id":{"$oid":"61b7b7b9f12488e53820cf52"},"Username":"Brian B","Password":"22222","Email":"BrianB@gmail.com","Birthday":{"$date":"1991-01-01T00:00:00Z"},"FavoriteMovies":["61b3d088d57fd41692c9f978"]}
+{"_id":{"$oid":"61b7b7b9f12488e53820cf53"},"Username":"Brian C","Password":"33333","Email":"BrianC@gmail.com","Birthday":{"$date":"1992-01-01T00:00:00Z"},"FavoriteMovies":["61b3d088d57fd41692c9f979"]}
+{"_id":{"$oid":"61b7b7b9f12488e53820cf54"},"Username":"Brian D","Password":"44444","Email":"BrianD@gmail.com","Birthday":{"$date":"1993-01-01T00:00:00Z"},"FavoriteMovies":["61b3d088d57fd41692c9f97f"]}
+{"_id":{"$oid":"61b7b7bdf12488e53820cf55"},"Username":"Brian E","Password":"55555","Email":"BrianE@gmail.com","Birthday":{"$date":"1994-01-01T00:00:00Z"},"FavoriteMovies":["61b3d088d57fd41692c9f981"]}

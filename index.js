@@ -139,11 +139,11 @@ app.post('/users',
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not apprea to be valid').isEmail()
 ], (req, res) => {
-    let errors = validationResults(req);
+    let errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-    let hashedPasswords = Users.hashedPasswords(req.body.Password);
+    let hashPasswords = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username})
     .then((user) => {
         if (user) {
@@ -152,7 +152,7 @@ app.post('/users',
             Users
             .create({
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashPasswords,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
             })
@@ -190,11 +190,7 @@ app.put('/users/:accountInfo', (req, res) => {
 });
 
 //above replaces accountInfo
-//app.put('/users/:accountInfo', (req, res) => 
-//{
-   // let user = users.find(user) => return user.name === req.params.name});
-    
-    //res.send('allows user access to their account information to edit/update user name'));
+
 
 app.post('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.accountInfo}, {

@@ -188,8 +188,8 @@ db.movies.insertOne(movie11)
 
 
 let user1 = {
-    Username: "Brian A",
-    Password: "11111",
+    Username: "Brian A", //BrianA
+    Password: "11111", //password1111
     Email: "BrianA@gmail.com",
     Birthday:new Date("1990-01-01"),
     FavoriteMovies: ["61b3bf01d57fd41692c9f977"],
