@@ -9,7 +9,6 @@ const Users = Models.User;
 
 
 //mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true});
-//mongoose.connect('mongodb+srv://BrianA:password1111@cluster0.ndghe.mongodb.net/Cluster0?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true});
 moongoose.connect( process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
@@ -24,7 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', '*'];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -66,7 +65,7 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) =>
         });
 });
 
-app.get('/movies/:movieInfo', (req, res)=> {
+app.get('/movies/:movieInfo', passport.authenticate('jwt', {session: false}),  (req, res)=> {
     Movies.findOne({Title: req.params.movieInfo})
     .then((movie) => {
         res.json(movie);
@@ -77,7 +76,7 @@ app.get('/movies/:movieInfo', (req, res)=> {
     });
 });
 
-app.get('/movies/genres/:genreInfo', (req, res)=> {
+app.get('/movies/genres/:genreInfo', passport.authenticate('jwt', {session: false}), (req, res)=> {
    Movies.findOne({"Genre.Name": req.params.genreInfo})
    .then((movie) => {
        res.json(movie.Genre.Description);
@@ -89,7 +88,7 @@ app.get('/movies/genres/:genreInfo', (req, res)=> {
 });
 
 //changed directorsInfo to directorInfo//
-app.get('/movies/directors/:directorInfo', (req, res) => {
+app.get('/movies/directors/:directorInfo', passport.authenticate('jwt', {session: false}),(req, res) => {
     Movies.find({ "Director.Name": req.params.directorInfo})
     .then((movie) => {
         res.json(movie);
@@ -108,7 +107,7 @@ app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.find()
     .then((users) => {
         res.status(201).json(users);
@@ -120,7 +119,7 @@ app.get('/users', (req, res) => {
 });
 
 //changed to :accountInfo from :username//
-app.get('/users/:accountInfo', (req, res) => {
+app.get('/users/:accountInfo', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOne({ Username: req.params.accountInfo})
     .then((user) => {
         res.json(user);
@@ -172,7 +171,7 @@ app.post('/users',
 });
 
 //changed back to accountInfo instead of username//
-app.put('/users/:accountInfo', (req, res) => {
+app.put('/users/:accountInfo', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.accountInfo}, { $set: {
         Username: req.body.Username,
         Password: req.body.Password,
@@ -194,7 +193,7 @@ app.put('/users/:accountInfo', (req, res) => {
 //above replaces accountInfo
 
 
-app.post('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
+app.post('/users/:accountInfo/favoritesList/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.accountInfo}, {
         $push: {FavoriteMovies: req.params.movieID}
     },
@@ -212,7 +211,7 @@ app.post('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
 
 //Delete Requests
 
-app.delete('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
+app.delete('/users/:accountInfo/favoritesList/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.accountInfo}, {
         $pull: {
             FavoriteMovies: req.params.movieID}
@@ -228,7 +227,7 @@ app.delete('/users/:accountInfo/favoritesList/:movieID', (req, res) => {
     });
 });
 
-app.delete('/users/:accountInfo', (req, res) => {
+app.delete('/users/:accountInfo', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOneAndRemove({ Username: req.params.accountInfo})
     .then((user) => {
         if (!user) {
