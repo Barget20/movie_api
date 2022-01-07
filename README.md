@@ -1,4 +1,4 @@
-<h1> Movie_API Project: </h>
+<h1> Movie_API Project: </h1>
 
 <p>This project was made to create a movie database from scratch on the server-side using Node.js. </p>
 
